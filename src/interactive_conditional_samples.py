@@ -66,10 +66,10 @@ def interact_model(
         saver.restore(sess, ckpt)
 
         while True:
-            raw_text = sys.stdin.read("Model prompt >>> ")
+            raw_text = sys.stdin.read()
             while not raw_text:
                 print('Prompt should not be empty!')
-                raw_text = sys.stdin.read("Model prompt >>> ")
+                raw_text = sys.stdin.read()
             context_tokens = enc.encode(raw_text)
             generated = 0
             for _ in range(nsamples // batch_size):
