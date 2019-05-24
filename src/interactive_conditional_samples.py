@@ -5,6 +5,7 @@ import json
 import os
 import numpy as np
 import tensorflow as tf
+import sys
 
 import model, sample, encoder
 
@@ -65,10 +66,10 @@ def interact_model(
         saver.restore(sess, ckpt)
 
         while True:
-            raw_text = input("Model prompt >>> ")
+            raw_text = sys.stdin.read("Model prompt >>> ")
             while not raw_text:
                 print('Prompt should not be empty!')
-                raw_text = input("Model prompt >>> ")
+                raw_text = sys.stdin.read("Model prompt >>> ")
             context_tokens = enc.encode(raw_text)
             generated = 0
             for _ in range(nsamples // batch_size):
